@@ -19,6 +19,4 @@ public class Doctor {
     private Department department;
     @OneToMany(mappedBy = "doctor")
     private List<Reserve>reserves = new ArrayList<>();
-    @OneToMany(mappedBy = "doctor")
-    private List<Treatment>treatments = new ArrayList<>();
 }
