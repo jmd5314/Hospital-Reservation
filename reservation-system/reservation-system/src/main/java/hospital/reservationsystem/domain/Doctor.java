@@ -14,7 +14,7 @@ public class Doctor {
     @Column(name = "doctor_id")
     private Long id;
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_name")
     private Department department;
     @OneToMany(mappedBy = "doctor")

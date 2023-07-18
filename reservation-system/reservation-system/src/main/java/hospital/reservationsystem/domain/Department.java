@@ -15,7 +15,7 @@ public class Department {
     private String phoneNumber;
     @OneToMany(mappedBy = "department")
     private List<Doctor> doctors = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 }
