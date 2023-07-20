@@ -17,7 +17,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     //환자 등록
     @Transactional
-    public Long save(Patient patient){
+    public Long join(Patient patient){
         patientRepository.save(patient);
         return patient.getId();
     }
