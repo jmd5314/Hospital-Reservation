@@ -31,7 +31,6 @@ public class HospitalService {
         Doctor doctor7 = Doctor.createDoctor("조인경");
         Doctor doctor8 = Doctor.createDoctor("조희진");
 
-
         Department department1 = Department.createDepartment("비뇨의학과","0310349043",doctor1);
         department1.addDoctor(doctor2);
         department1.addDoctor(doctor3);
@@ -56,6 +55,9 @@ public class HospitalService {
     public List<Hospital> findHospitals(){
         return hospitalRepository.findAll();
     }
-
+    @Transactional
+    public void close(){
+        hospitalRepository.close();
+    }
 
 }

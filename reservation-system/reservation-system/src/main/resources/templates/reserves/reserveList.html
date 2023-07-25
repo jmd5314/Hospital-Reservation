@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>병원이름</th>
+                <th>진료과 이름</th>
+                <th>의사 이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through each hospital -->
+            <th:block th:each="hospital : ${hospitals}">
+                <th:block th:each="department : ${hospital.departments}">
+                    <th:block th:each="doctor : ${department.doctors}">
+                        <tr>
+                            <td th:text="${hospital.name}"></td>
+                            <td th:text="${department.name}"></td>
+                            <td th:text="${doctor.name}"></td>
+                        </tr>
+                    </th:block>
+                </th:block>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

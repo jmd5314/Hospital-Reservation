@@ -25,9 +25,7 @@ public class HospitalRepository {
         return em.createQuery("select h from Hospital h", Hospital.class).getResultList();
     }
 
-    public void remove(List<Hospital> hospitals) {
-        for(Hospital hospital : hospitals)
-            em.remove(hospital);
+    public void close() {
+        em.close();
     }
-
 }
