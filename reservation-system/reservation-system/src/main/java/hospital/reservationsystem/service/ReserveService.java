@@ -1,6 +1,7 @@
 package hospital.reservationsystem.service;
 
 import hospital.reservationsystem.domain.Reserve;
+import hospital.reservationsystem.repository.DoctorRepository;
 import hospital.reservationsystem.repository.ReserveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

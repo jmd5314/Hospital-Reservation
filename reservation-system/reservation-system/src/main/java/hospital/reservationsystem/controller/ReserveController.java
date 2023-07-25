@@ -1,13 +1,17 @@
 package hospital.reservationsystem.controller;
 import hospital.reservationsystem.domain.*;
-import hospital.reservationsystem.service.HospitalService;
-import hospital.reservationsystem.service.ReserveService;
+import hospital.reservationsystem.repository.DoctorRepository;
+import hospital.reservationsystem.service.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -15,7 +19,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReserveController {
     private final HospitalService hospitalService;
+    private final DoctorService doctorService;
+    private final DepartmentService departmentService;
     private final ReserveService reserveService;
+    private final PatientService patientService;
 
     @PostConstruct
     public void init(){
@@ -30,5 +37,25 @@ public class ReserveController {
         List<Hospital> hospitals = hospitalService.findHospitals();
         model.addAttribute("hospitals",hospitals);
         return"/reserves/reserveList";
+    }
+    @GetMapping ("reserves/{doctorId}/create")
+    public String createReserve(@PathVariable("doctorId") Long doctorId, Model model){
+        ReserveForm reserveForm = new ReserveForm();
+        List<Patient> patients = patientService.findPatients();
+        model.addAttribute("reserveForm",reserveForm);
+        model.addAttribute("patients",patients);
+        return "/reserves/createReserveForm";
+    }
+    @PostMapping("reserves/{doctorId}/created")
+    public String updateReserve(@PathVariable("doctorId") Long doctorId, @Valid ReserveForm form){
+        Doctor doctor = doctorService.findDoctor(doctorId);
+        Patient patient = patientService.findPatient(form.getPatientId());
+        Reserve reserve = new Reserve();
+        reserve.setPatient(patient);
+        reserve.setDate(form.getDate());
+        reserve.setStatus(ReserveStatus.RESERVE);
+        reserve.setDoctor(doctor);
+        reserveService.save(reserve);
+        return "redirect:/";
     }
 }
