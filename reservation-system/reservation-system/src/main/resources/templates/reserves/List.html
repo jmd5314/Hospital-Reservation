@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>환자이름</th>
+                <th>의사이름</th>
+                <th>날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reserve : ${reserves}">
+                <td th:text="${reserve.id}"></td>
+                <td th:text="${reserve.patient.name}"></td>
+                <td th:text="${reserve.doctor.name}"></td>
+                <td th:text="${reserve.date}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

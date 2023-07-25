@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -33,29 +34,35 @@ public class ReserveController {
         hospitalService.close();
     }
     @GetMapping("/reserves/new")
-    public String list(Model model){
+    public String listHospitals(Model model){
         List<Hospital> hospitals = hospitalService.findHospitals();
         model.addAttribute("hospitals",hospitals);
-        return"/reserves/reserveList";
+        return"reserves/reserveList";
     }
-    @GetMapping ("reserves/{doctorId}/create")
+    @GetMapping ("/reserves/{doctorId}/create")
     public String createReserve(@PathVariable("doctorId") Long doctorId, Model model){
         ReserveForm reserveForm = new ReserveForm();
         List<Patient> patients = patientService.findPatients();
         model.addAttribute("reserveForm",reserveForm);
         model.addAttribute("patients",patients);
-        return "/reserves/createReserveForm";
+        return "reserves/createReserveForm";
     }
-    @PostMapping("reserves/{doctorId}/created")
-    public String updateReserve(@PathVariable("doctorId") Long doctorId, @Valid ReserveForm form){
+    @PostMapping("/reserves/{doctorId}/create")
+    public String updateReserve(@PathVariable("doctorId") Long doctorId,
+                                @ModelAttribute("reserveForm") ReserveForm form) {
         Doctor doctor = doctorService.findDoctor(doctorId);
-        Patient patient = patientService.findPatient(form.getPatientId());
         Reserve reserve = new Reserve();
-        reserve.setPatient(patient);
+        reserve.setPatient(patientService.findPatient(form.getPatientId()));
         reserve.setDate(form.getDate());
         reserve.setStatus(ReserveStatus.RESERVE);
         reserve.setDoctor(doctor);
         reserveService.save(reserve);
-        return "redirect:/";
+        return "redirect:/reserves";
+    }
+    @GetMapping("/reserves")
+    public String listReserve(Model model){
+        List<Reserve> reserves = reserveService.findReserves();
+        model.addAttribute("reserves",reserves);
+        return "reserves/List";
     }
 }

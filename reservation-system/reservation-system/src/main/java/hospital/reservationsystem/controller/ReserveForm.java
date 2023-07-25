@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 public class ReserveForm {
+    private LocalDateTime date ;
     private Long patientId;
-    private LocalDateTime date;
 }
