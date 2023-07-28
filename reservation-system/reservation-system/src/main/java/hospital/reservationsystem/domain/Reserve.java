@@ -32,12 +32,5 @@ public class Reserve {
         reserve.setStatus(ReserveStatus.RESERVE);
         return reserve;
     }
-    //== 비지니스 로직 ==//
-    public void cancel(){
-        if(status!=ReserveStatus.RESERVE){
-            throw new IllegalStateException("예약을 취소할 수 없습니다.");
-        }
-        this.setStatus(ReserveStatus.CANCEL);
-    }
 
 }
