@@ -8,7 +8,7 @@
         <input type="hidden" name="doctorId" th:value="${doctorId}" />
 
         <div class="form-group">
-            <label for="patient">등록된 환자</label>
+            <label for="patient">환자 선택</label>
             <select name="patientId" id="patient" class="form-control">
                 <option value="">환자선택</option>
                 <option th:each="patient : ${patients}"

@@ -50,7 +50,6 @@ public class ReserveController {
         Reserve reserve = new Reserve();
         reserve.setPatient(patientService.findPatient(form.getPatientId()));
         reserve.setDate(form.getDate());
-        reserve.setStatus(ReserveStatus.RESERVE);
         reserve.setDoctor(doctorService.findDoctor(form.getDoctorId()));
         reserveService.save(reserve);
         return "redirect:/reserves";
