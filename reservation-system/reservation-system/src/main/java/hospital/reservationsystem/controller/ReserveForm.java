@@ -12,4 +12,5 @@ import java.time.LocalDateTime;
 public class ReserveForm {
     private LocalDateTime date ;
     private Long patientId;
+    private Long doctorId;
 }

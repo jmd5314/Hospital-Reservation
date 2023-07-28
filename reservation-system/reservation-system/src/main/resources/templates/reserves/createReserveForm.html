@@ -4,8 +4,9 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    <form role="form" action="/reserves/{doctorId}/create" th:object="${reserveForm}"
-          method="post">
+    <form role="form" action="/reserves/create" th:object="${reserveForm}" method="post">
+        <input type="hidden" name="doctorId" th:value="${doctorId}" />
+
         <div class="form-group">
             <label for="patient">등록된 환자</label>
             <select name="patientId" id="patient" class="form-control">
@@ -16,8 +17,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="datetime">날짜 및 시간 선택</label>
-            <input type="datetime-local" id="datetime" name="date" class="form-control" th:value="${#temporals.format(reserveForm.date, 'yyyy-MM-dd\'T\'HH:mm')}" />
+            <label for="date">예약 날짜/시간 선택</label>
+            <input type="datetime-local" id="date" name="date" class="form-control" th:value="${reserveForm.date}" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

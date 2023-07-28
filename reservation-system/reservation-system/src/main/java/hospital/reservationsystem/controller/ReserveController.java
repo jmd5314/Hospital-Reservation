@@ -1,14 +1,11 @@
 package hospital.reservationsystem.controller;
 import hospital.reservationsystem.domain.*;
-import hospital.reservationsystem.repository.DoctorRepository;
 import hospital.reservationsystem.service.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,22 +37,21 @@ public class ReserveController {
         return"reserves/reserveList";
     }
     @GetMapping ("/reserves/{doctorId}/create")
-    public String createReserve(@PathVariable("doctorId") Long doctorId, Model model){
+    public String createReserve(@PathVariable("doctorId") Long doctorId,Model model){
         ReserveForm reserveForm = new ReserveForm();
         List<Patient> patients = patientService.findPatients();
         model.addAttribute("reserveForm",reserveForm);
         model.addAttribute("patients",patients);
+        model.addAttribute("doctorId",doctorId);
         return "reserves/createReserveForm";
     }
-    @PostMapping("/reserves/{doctorId}/create")
-    public String updateReserve(@PathVariable("doctorId") Long doctorId,
-                                @ModelAttribute("reserveForm") ReserveForm form) {
-        Doctor doctor = doctorService.findDoctor(doctorId);
+    @PostMapping("/reserves/create")
+    public String updateReserve(@ModelAttribute("reserveForm") ReserveForm form) {
         Reserve reserve = new Reserve();
         reserve.setPatient(patientService.findPatient(form.getPatientId()));
         reserve.setDate(form.getDate());
         reserve.setStatus(ReserveStatus.RESERVE);
-        reserve.setDoctor(doctor);
+        reserve.setDoctor(doctorService.findDoctor(form.getDoctorId()));
         reserveService.save(reserve);
         return "redirect:/reserves";
     }
