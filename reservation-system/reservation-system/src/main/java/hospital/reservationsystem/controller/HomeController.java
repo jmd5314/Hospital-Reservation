@@ -1,10 +1,4 @@
 package hospital.reservationsystem.controller;
-
-import hospital.reservationsystem.domain.Address;
-import hospital.reservationsystem.domain.Department;
-import hospital.reservationsystem.domain.Doctor;
-import hospital.reservationsystem.domain.Hospital;
-import hospital.reservationsystem.service.HospitalService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
