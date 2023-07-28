@@ -10,7 +10,9 @@
             <tr>
                 <th>#</th>
                 <th>환자이름</th>
-                <th>의사이름</th>
+                <th>병원</th>
+                <th>진료과</th>
+                <th>의사</th>
                 <th>예약날짜</th>
             </tr>
             </thead>
@@ -18,6 +20,8 @@
             <tr th:each="reserve : ${reserves}">
                 <td th:text="${reserve.id}"></td>
                 <td th:text="${reserve.patient.name}"></td>
+                <td th:text="${reserve.doctor.department.hospital.name}"></td>
+                <td th:text="${reserve.doctor.department.name}"></td>
                 <td th:text="${reserve.doctor.name}"></td>
                 <td th:text="${reserve.date}"></td>
             </tr>
