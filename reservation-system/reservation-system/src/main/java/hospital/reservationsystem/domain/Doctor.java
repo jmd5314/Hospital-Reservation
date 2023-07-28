@@ -16,6 +16,7 @@ public class Doctor {
     @Column(name = "doctor_id")
     private Long id;
     private String name;
+    private int duration;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_name")
     private Department department;
@@ -23,9 +24,10 @@ public class Doctor {
     private List<Reserve>reserves = new ArrayList<>();
 
     // == 생성 메서드 ==//
-    public static Doctor createDoctor(String name){
+    public static Doctor createDoctor(String name,int duration){
         Doctor doctor = new Doctor();
         doctor.setName(name);
+        doctor.setDuration(duration);
         return doctor;
     }
 }

@@ -22,14 +22,14 @@ public class HospitalService {
      */
     @Transactional
     public Long create(){
-        Doctor doctor1 = Doctor.createDoctor("김민수");
-        Doctor doctor2 = Doctor.createDoctor("이혜영");
-        Doctor doctor3 = Doctor.createDoctor("조혜은");
-        Doctor doctor4 = Doctor.createDoctor("조혜성");
-        Doctor doctor5 = Doctor.createDoctor("김용찬");
-        Doctor doctor6 = Doctor.createDoctor("이혜진");
-        Doctor doctor7 = Doctor.createDoctor("조인경");
-        Doctor doctor8 = Doctor.createDoctor("조희진");
+        Doctor doctor1 = Doctor.createDoctor("김민수",7);
+        Doctor doctor2 = Doctor.createDoctor("이혜영",8);
+        Doctor doctor3 = Doctor.createDoctor("조혜은",6);
+        Doctor doctor4 = Doctor.createDoctor("조혜성",3);
+        Doctor doctor5 = Doctor.createDoctor("김용찬",4);
+        Doctor doctor6 = Doctor.createDoctor("이혜진",5);
+        Doctor doctor7 = Doctor.createDoctor("조인경",10);
+        Doctor doctor8 = Doctor.createDoctor("조희진",9);
 
         Department department1 = Department.createDepartment("비뇨의학과","0310349043",doctor1);
         department1.addDoctor(doctor2);

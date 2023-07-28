@@ -11,6 +11,7 @@
                 <th>병원이름</th>
                 <th>진료과 이름</th>
                 <th>의사 이름</th>
+                <th>의사 경력</th>
                 <th></th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
                             <td th:text="${hospital.name}"></td>
                             <td th:text="${department.name}"></td>
                             <td th:text="${doctor.name}"></td>
+                            <td th:text="${doctor.duration}"></td>
                             <td><a href="#" th:href="@{/reserves/{id}/create (id=${doctor.id})}"
                                    class="btn btn-primary" role="button">예약</a></td>
                         </tr>
