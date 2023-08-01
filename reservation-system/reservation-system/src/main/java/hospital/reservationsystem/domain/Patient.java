@@ -15,6 +15,7 @@ public class Patient {
     private Long id;
     private String name;
     private int age;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     @OneToMany(mappedBy = "patient")
     private List<Reserve> reserves = new ArrayList<>();
